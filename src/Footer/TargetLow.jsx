@@ -1,17 +1,21 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Intervals from "./Intervals";
 
-function TargetLow() {
+function TargetLow(props) {
+
+
+
     return (
         <>
             <Row>
-                <Col>TargetLow</Col>
+                <Col>Want to consume before the morning</Col>
             </Row>
             <Row>
-                <Col>1 of 1</Col>
+                <Col><Intervals activeInterval={props.activeInterval} setActiveInterval={props.setActiveInterval} ></Intervals></Col>
             </Row>
             <Row>
-                <Col>1 of 1</Col>
+                <Col>Last Row</Col>
             </Row>
         </>
     );

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -6,11 +5,17 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 import { PRICE_BUTTONS } from "./constans"
 
-function Info({activePrice, setActivePrice}) {
+function Info({ activePrice, setActivePrice }) {
 
     return (
         <>
-            <Col>1 of 3</Col>
+            <Col>
+                <div>
+                    <div>The price of electricity at the moment is
+                    </div>
+                    <div>HIGH</div>
+                </div>
+            </Col>
             <Col>
                 <ButtonGroup>
                     {
@@ -21,7 +26,7 @@ function Info({activePrice, setActivePrice}) {
 
                 </ButtonGroup>
             </Col>
-            <Col>3 of 3</Col>
+            <Col><div className="priceElement"><b>11.23</b><div>cents / kilowatt-hour</div></div></Col>
         </>
     );
 }
