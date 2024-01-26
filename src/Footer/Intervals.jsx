@@ -1,7 +1,7 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Stack from 'react-bootstrap/Stack';
 import { TIME_INTERVALS } from "./constans"
 
 function Intervals({ activeInterval, setActiveInterval }) {
@@ -9,12 +9,11 @@ function Intervals({ activeInterval, setActiveInterval }) {
         <>
             <Row>
                 <Col>
-                    <ButtonGroup>
-
+                <Stack className='justify-content-center' direction="horizontal" gap={3}>
                         {TIME_INTERVALS.map((i) =>{
-                            return <Button key={i} active={activeInterval === i} variant="info" onClick={() => setActiveInterval(i)}><span>{i} h</span></Button>;
+                            return <Button key={i} active={activeInterval === i} variant="outline-warning" onClick={() => setActiveInterval(i)}><span>{i} h</span></Button>;
                         })}
-                    </ButtonGroup>
+                </Stack>
                 </Col>
             </Row>
         </>
