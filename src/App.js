@@ -13,7 +13,7 @@ function App() {
   return (
     <Container>
       <Head activePrice={activePrice} setActivePrice={setActivePrice}/>
-      <Body/>
+      <Body activeInterval={activeInterval}/>
       <Footer activePrice={activePrice} activeInterval={activeInterval} setActiveInterval={setActiveInterval} />
     </Container>
   ); 

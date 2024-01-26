@@ -1,13 +1,13 @@
 
 import TargetLow from "./TargetLow";
 import TargetHigh from "./TargetHigh";
-import { PRICE_BUTTONS } from "../Head";
+import { DEFAULT_ACTIVE_BUTTON } from "../Head";
 
 
 function Footer(props) {
     return (
         <>
-            {props.activePrice === PRICE_BUTTONS[0].id ? <TargetLow activeInterval={props.activeInterval} setActiveInterval={props.setActiveInterval} /> : <TargetHigh/>}
+            {props.activePrice === DEFAULT_ACTIVE_BUTTON ? <TargetLow activeInterval={props.activeInterval} setActiveInterval={props.setActiveInterval} /> : <TargetHigh/>}
         </>
     );
 }
