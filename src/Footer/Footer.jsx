@@ -1,14 +1,13 @@
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Intervals from "./Intervals";
-import TargetLow from "./TargetLow";
 
-function Footer() {
+import TargetLow from "./TargetLow";
+import TargetHigh from "./TargetHigh";
+import { PRICE_BUTTONS } from "../Head";
+
+
+function Footer(props) {
     return (
         <>
-            <Intervals></Intervals>
-            <TargetLow></TargetLow>
-
+            {props.activePrice === PRICE_BUTTONS[0].id ? <TargetLow activeInterval={props.activeInterval} setActiveInterval={props.setActiveInterval} /> : <TargetHigh/>}
         </>
     );
 }
