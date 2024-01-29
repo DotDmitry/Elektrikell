@@ -8,22 +8,24 @@ import Footer from "./Footer";
 import SideBar from "./SideBar";
 
 
+
+
 function App() {
   const [activePrice, setActivePrice] = useState(DEFAULT_ACTIVE_BUTTON);
   const [activeInterval, setActiveInterval] = useState(1);
   const [showFilters, setFiltersShow] = useState(false);
 
-  const handleFiltersClose = () => setFiltersShow(false);
-  const handleFiltersShow = () => setFiltersShow(true);
+  const handleCloseSideBar = () => setFiltersShow(false);
+  const handleShowSideBar = () => setFiltersShow(true);
 
   return (
     <>
-      <SideBar showFilters={showFilters} handleFiltersClose={handleFiltersClose} />
       <Container>
-        <Head activePrice={activePrice} setActivePrice={setActivePrice} handleFiltersShow={handleFiltersShow} />
+        <Head activePrice={activePrice} setActivePrice={setActivePrice} handleShowSideBar={handleShowSideBar} />
         <Body activeInterval={activeInterval} />
         <Footer activePrice={activePrice} activeInterval={activeInterval} setActiveInterval={setActiveInterval} />
       </Container>
+      <SideBar show={showFilters} handleClose={handleCloseSideBar} />
     </>
   );
 }

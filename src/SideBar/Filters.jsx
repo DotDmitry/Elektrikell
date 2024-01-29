@@ -29,7 +29,12 @@ function Filters() {
         event.preventDefault();
         // Perform any actions with the form data, such as sending it to a server
         console.log('Form data submitted:', formData);
+        const from=event.target.filtersFrom.value;
+        const until=event.target.filtersUntil.value;
+
+        console.log('from:', from);
     };
+
 
 
     return (

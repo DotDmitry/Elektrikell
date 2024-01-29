@@ -4,7 +4,7 @@ import Filters from "./Filters";
 function SideBar(props) {
     return (
         <>
-            <Offcanvas show={props.showFilters} onHide={props.handleFiltersClose}>
+            <Offcanvas show={props.show} onHide={props.handleClose}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Filters</Offcanvas.Title>
                 </Offcanvas.Header>
