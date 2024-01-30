@@ -17,6 +17,7 @@ function App() {
 
   const handleCloseSideBar = () => setFiltersShow(false);
   const handleShowSideBar = () => setFiltersShow(true);
+  
 
   return (
     <>
