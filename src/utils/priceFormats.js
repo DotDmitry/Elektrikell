@@ -1,4 +1,4 @@
 import lodash from "lodash";
 
 
-export const mwToKw=(price)=>lodash.round(parseFloat(price)/10,2);
+export const mwToKw=(price)=>lodash.round(1.22*(parseFloat(price)/10),2);
