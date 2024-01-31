@@ -6,6 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Badge from 'react-bootstrap/Badge';
 import moment from "moment/moment"
 import { getPriceCurrent } from "../services/ApiService";
+import {mwToKw} from "../utils";
 
 import { PRICE_BUTTONS, BADGES } from "./constans"
 
@@ -45,7 +46,7 @@ function Info({ activePrice, setActivePrice }) {
                 </ButtonGroup>
             </Col>
             <Col className="text-end">
-                <h2>{(priceCurrent.price/10).toFixed(2)}</h2>
+                <h2>{mwToKw(priceCurrent.price)}</h2>
                 <div className='fs-5'>cents / kilowatt-hour</div>
                 <div className='fs-6'>updated at {moment.unix(priceCurrent.timestamp).format("DD/MM/yyyy HH:mm")}</div>
             </Col>

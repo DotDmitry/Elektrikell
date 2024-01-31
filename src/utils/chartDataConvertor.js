@@ -1,4 +1,5 @@
 import moment from "moment/moment"
+import {mwToKw} from "../utils";
 
 export default function chartDataConvertor(priceData) {
 
@@ -20,7 +21,7 @@ export default function chartDataConvertor(priceData) {
         const color = colors[uniqDates.size % colors.length];
 
         let result = {
-            price:(data.price/10).toFixed(2),//+" s/kWh"
+            price:mwToKw(data.price),
             hour: hour,
             day: day,
             color: color

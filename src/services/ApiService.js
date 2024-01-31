@@ -15,8 +15,6 @@ export const getPriceData = async () => {
         end: twoDaysLater.toISOString(),
     });
 
-    
-
     const response = await fetch(`${apiUrl}/nps/price?${data}`);
 
     return await response.json();
