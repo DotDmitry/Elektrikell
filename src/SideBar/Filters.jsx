@@ -2,48 +2,31 @@ import { useState } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import {convertToInputFormat,convertToRequstFormat} from "../utils/dates"
 
-function Filters() {
+function Filters(props) {
 
-    const currentDate = new Date();
-
-    const twoDaysLater = new Date(currentDate);
-    twoDaysLater.setDate(currentDate.getDate() + 2);
-
-    const [formData, setFormData] = useState({
-        filtersFrom: currentDate.toISOString().split('T')[0],
-        filtersUntil: twoDaysLater.toISOString().split('T')[0],
-    });
-
-    // Handle form input changes
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    // Handle form submission
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Perform any actions with the form data, such as sending it to a server
-        console.log('Form data submitted:', formData);
-        const from=event.target.filtersFrom.value;
-        const until=event.target.filtersUntil.value;
+        const from =convertToRequstFormat(event.target.filtersFrom.value) ;
+        props.setfilterFrom(from);
+
+        const until = convertToRequstFormat(event.target.filtersUntil.value);
+        props.setfilterUntil(until);
 
         console.log('from:', from);
+        props.handleClose();
     };
 
-
+    //console.log('from:', props.filterFrom);
 
     return (
         <>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="filtersFrom">
                     <Form.Label>From</Form.Label>
-                    <Form.Control value={formData.filtersFrom} name="filtersFrom"
-                        onChange={handleInputChange} type="date" placeholder="Enter start date" />
+                    <Form.Control defaultValue={convertToInputFormat(props.filterFrom)} name="filtersFrom"
+                        type="datetime-local" placeholder="Enter start date" />
                     {/*<Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text> */}
@@ -51,8 +34,8 @@ function Filters() {
 
                 <Form.Group className="mb-3" controlId="filtersUntil">
                     <Form.Label>Until</Form.Label>
-                    <Form.Control value={formData.filtersUntil} name="filtersUntil"
-                        onChange={handleInputChange} type="date" placeholder="Enter last date" />
+                    <Form.Control defaultValue={convertToInputFormat(props.filterUntil)} name="filtersUntil"
+                        type="datetime-local" placeholder="Enter last date" />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">

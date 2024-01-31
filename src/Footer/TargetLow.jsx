@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Intervals from "./Intervals";
 
+
+
 function TargetLow(props) {
-
-
 
     return (
         <>
@@ -15,7 +16,8 @@ function TargetLow(props) {
                 <Col><Intervals activeInterval={props.activeInterval} setActiveInterval={props.setActiveInterval} ></Intervals></Col>
             </Row>
             <Row>
-                <Col>Last Row</Col>
+                <Col>
+                </Col>
             </Row>
         </>
     );

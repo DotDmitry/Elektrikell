@@ -9,16 +9,16 @@ import { getPriceData } from "../services/ApiService";
 import { chartDataConvertor } from "../utils";
 
 
-function Body() {
+function Body(props) {
     const [priceData, setPriceData] = useState(null);
     useEffect(() => {
-        getPriceData().then(
+        getPriceData(props.filterFrom, props.filterUntil).then(
             ({ data }) => {
                 setPriceData(chartDataConvertor(data.ee));
                 console.log(priceData);
             }
         )
-    }, []);
+    }, [props.filterFrom, props.filterUntil]);
 
     const CustomTick = ({ x, y, payload, data }) => {
         const backgroundColor = data[payload.index].color;
@@ -37,7 +37,7 @@ function Body() {
         if (active && payload) {
             return (
                 <div className="custom-tooltip bg-light border border-primary p-2">
-                    <div className="date">{`${payload[0].payload.day}`}</div>
+                    <div className="date">{`${payload[0].payload?.day}`}</div>
                     <div className="label">{`${label}:00 - ${Number(label) + 1}:00`}</div>
                     <div className="intro">{`${payload[0].value}  c/kWh`}</div>
                 </div>
@@ -74,7 +74,7 @@ function Body() {
                         <LineChart data={priceData}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis xAxisId="0" dataKey="hour" />
-                            <XAxis xAxisId="1" dataKey="day" tick={<CustomTick data={priceData} />} interval={23} />
+                            <XAxis xAxisId="1" dataKey="day" tick={<CustomTick data={priceData} />} /> {/* interval={23} */}
                             <YAxis />
                             <Tooltip content={<CustomTooltip />} />
                             <Line type="stepAfter" dataKey="price" stroke="#8884d8" dot={<CustomDot />} />

@@ -12,7 +12,7 @@ import { PRICE_BUTTONS, BADGES } from "./constans"
 
 function Info({ activePrice, setActivePrice }) {
 
-    const [priceCurrent, setPriceCurrent] = useState({price:"",timestamp:""});
+    const [priceCurrent, setPriceCurrent] = useState({price:0,timestamp:0});
     useEffect(() => {
         getPriceCurrent()
             .then(

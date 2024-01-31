@@ -9,7 +9,7 @@ function SideBar(props) {
                     <Offcanvas.Title>Filters</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <Filters />
+                    <Filters handleClose={props.handleClose} filterFrom={props.filterFrom}  setfilterFrom={props.setfilterFrom} filterUntil={props.filterUntil} setfilterUntil={props.setfilterUntil} />
                 </Offcanvas.Body>
             </Offcanvas>
         </>
