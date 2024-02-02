@@ -34,7 +34,7 @@ function Body(props) {
     };
 
     const CustomTooltip = ({ active, payload, label }) => {
-        if (active && payload) {
+        if (active && payload && payload.length) {
             return (
                 <div className="custom-tooltip bg-light border border-primary p-2">
                     <div className="date">{`${payload[0].payload?.day}`}</div>
