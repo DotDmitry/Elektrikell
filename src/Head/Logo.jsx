@@ -8,7 +8,7 @@ function Logo(props) {
         <>
             <Col>
             Logo 
-            <Button variant="outline-secondary" onClick={props.handleShowSideBar}>
+            <Button className='p-2' style={{lineHeight:'0'}} variant="outline-secondary" onClick={props.handleShowSideBar}>
                 <Sliders />
             </Button>
             </Col>
