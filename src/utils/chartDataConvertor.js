@@ -1,5 +1,5 @@
 import moment from "moment/moment"
-import {mwToKw} from "../utils";
+import { mwToKw } from "../utils";
 
 export default function chartDataConvertor(priceData) {
 
@@ -11,23 +11,42 @@ export default function chartDataConvertor(priceData) {
         '#9b59b6', // Purple
         '#f39c12', // Orange
     ];
+    let minIndex = 0;
+    let min = 10000000;
 
-    return priceData.map((data) => {
-
-        const currentDate = moment.unix(data.timestamp);
-        const hour = currentDate.format("HH");
-        const day = currentDate.format("DD/MM/yyyy");
+    let maxIndex = 0;
+    let max = 0;
+    const resultArr = priceData.map((data, index) => {
+        const thisDate = moment.unix(data.timestamp);
+        const hour = thisDate.format("HH");
+        const day = thisDate.format("DD/MM/yyyy");
         uniqDates.add(day);
         const color = colors[uniqDates.size % colors.length];
+        if (min > data.price) {
+            min = data.price;
+            minIndex = index;
+        }
+        if (max < data.price) {
+            max = data.price;
+            maxIndex = index;
+        }
 
         let result = {
-            price:mwToKw(data.price),
+            timestamp: data.timestamp,
+            price: mwToKw(data.price),
             hour: hour,
             day: day,
-            color: color
+            color: color,
+            max: false,
+            min: false
         }
         return result;
     });
+
+    resultArr[minIndex].min = true;
+    resultArr[maxIndex].max = true;
+
+    return resultArr;
 }
 
 
