@@ -21,14 +21,16 @@ function App() {
 
   const [filterFrom, setfilterFrom] = useState(getDefaultFrom);
   const [filterUntil, setfilterUntil] = useState(getDefaultUntil);
+  const [countdownDataContext, setCountdownDataContext] = useState(null);
+  const [averagePrice, setAveragePrice] = useState(0);
   
 
   return (
     <>
       <Container>
-        <Head activePrice={activePrice} setActivePrice={setActivePrice} handleShowSideBar={handleShowSideBar} />
-        <Body activeInterval={activeInterval} filterFrom={filterFrom} filterUntil={filterUntil} />
-        <Footer activePrice={activePrice} activeInterval={activeInterval} setActiveInterval={setActiveInterval} />
+        <Head activePrice={activePrice} setActivePrice={setActivePrice} averagePrice={averagePrice} handleShowSideBar={handleShowSideBar} />
+        <Body activeInterval={activeInterval} setAveragePrice={setAveragePrice} filterFrom={filterFrom} filterUntil={filterUntil} setCountdownDataContext={setCountdownDataContext}/>
+        <Footer activePrice={activePrice} activeInterval={activeInterval} setActiveInterval={setActiveInterval} countdownDataContext={countdownDataContext} />
       </Container>
       <SideBar show={showFilters} handleClose={handleCloseSideBar} filterFrom={filterFrom} setfilterFrom={setfilterFrom} filterUntil={filterUntil} setfilterUntil={setfilterUntil}/>
     </>

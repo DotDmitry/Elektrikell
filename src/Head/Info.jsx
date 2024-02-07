@@ -6,13 +6,15 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Badge from 'react-bootstrap/Badge';
 import moment from "moment/moment"
 import { getPriceCurrent } from "../services/ApiService";
-import {mwToKw} from "../utils";
+import { mwToKw } from "../utils";
 
 import { PRICE_BUTTONS, BADGES } from "./constans"
 
-function Info({ activePrice, setActivePrice }) {
+function Info({ activePrice, setActivePrice, averagePrice }) {
 
-    const [priceCurrent, setPriceCurrent] = useState({price:0,timestamp:0});
+    const [priceCurrent, setPriceCurrent] = useState({ price: 0, timestamp: 0 });
+    const [isLow, setIsLow] = useState(false);
+
     useEffect(() => {
         getPriceCurrent()
             .then(
@@ -23,16 +25,17 @@ function Info({ activePrice, setActivePrice }) {
             )
     }, []);
 
+    useEffect(() => {
+        setIsLow(parseFloat(mwToKw(priceCurrent.price)) < averagePrice);
+    }, [priceCurrent, averagePrice]);
+
     return (
         <>
             <Col>
                 <div>
                     <div>The current price of electricity is</div>
+                    {isLow ? <Badge bg={BADGES[0].name}>{BADGES[0].id}</Badge> : <Badge bg={BADGES[1].name}>{BADGES[1].id}</Badge>}
 
-
-                    <Badge bg={BADGES[0].name}>{BADGES[0].id}</Badge>
-                    {/*  <Badge bg="danger">HIGH</Badge> */}
-                    <div>HIGH</div>
                 </div>
             </Col>
             <Col>

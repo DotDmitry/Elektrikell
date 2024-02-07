@@ -4,20 +4,17 @@ import Col from 'react-bootstrap/Col';
 import Intervals from "./Intervals";
 import Countdown from 'react-countdown';
 
-import { currentTimeStamp, currentTimeMinutes } from "../utils/dates";
-
-
 function TargetLow(props) {
 
     const countdownRef = useRef(null);
 
     useEffect(() => {
 
-        if (countdownRef.current) {
+        if (props.countdownDataContext && !props.countdownDataContext.isNow && countdownRef.current) {
             countdownRef.current.start();
         }
 
-    }, []);
+    }, [props.countdownDataContext]);
 
     return (
         <>
@@ -29,11 +26,23 @@ function TargetLow(props) {
             </Row>
             <Row>
                 <Col className='text-center'>
-                    <div>The best time for this is from 0: 00 to 1: 00, which is left</div>
-                    <Countdown ref={countdownRef} autoStart={false} className='fs-1' daysInHours={true} date={Date.now() + 3600000} >
-                        Completed
-                    </Countdown>
-                    <div>Then the price per kilowatt hour will be 1.22 cents, which is 87% cheaper than it is now</div>
+                    {props.countdownDataContext != null ?
+                        <>
+                            {props.countdownDataContext.isNow ?
+                                <>
+                                    <div>The best time for that</div>
+                                    <div className='fs-1 fw-semibold'>CURRENTLY</div>
+                                    <div>Later, all classes are already more expensive</div>
+                                </>
+                                :
+                                <>
+                                    <div>The best time for this is {props.countdownDataContext.bestTime}, which is left</div>
+                                    <Countdown ref={countdownRef} autoStart={false} className='fs-1' daysInHours={true} date={props.countdownDataContext.countDownMS} >
+                                    </Countdown>
+                                    <div>Then the price per kilowatt hour will be {props.countdownDataContext.averagePrice} cents, which is {props.countdownDataContext.deltaPercent}% {props.countdownDataContext.isCheap?"cheaper":"more expensive"} than it is now</div>
+                                </>}
+                        </> : <div></div>
+                    }
                 </Col>
             </Row>
         </>

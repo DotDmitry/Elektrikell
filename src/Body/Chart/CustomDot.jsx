@@ -1,4 +1,4 @@
-import { Dot, Label } from 'recharts';
+import { Dot } from 'recharts';
 import { currentTimeStamp, currentTimeMinutes } from "../../utils/dates";
 
 
