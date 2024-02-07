@@ -55,7 +55,7 @@ function Body(props) {
                             <XAxis xAxisId="0" dataKey="hour" />
                             <XAxis xAxisId="1" dataKey="day" tick={<CustomTick data={priceData} />} interval={0} tickLine={false} axisLine={false} />
                             <XAxis xAxisId="2" dataKey="timestamp" hide={true} />
-                            <YAxis />
+                            <YAxis dataKey="priceF" />
                             <Tooltip content={<CustomTooltip />} />
                             <Line type="stepAfter" dataKey="price" stroke="#8884d8" activeDot={false} dot={<CustomDot />} />
                             <ReferenceLine y={maxPrice} label={`Max: ${maxPrice} c/kWh`} stroke="red" strokeDasharray="3 3" />

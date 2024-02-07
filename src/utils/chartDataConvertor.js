@@ -1,5 +1,5 @@
 import moment from "moment/moment"
-import { mwToKw } from "../utils";
+import { mwToKw,mwToKwF } from "../utils";
 
 export default function chartDataConvertor(priceData) {
 
@@ -34,6 +34,7 @@ export default function chartDataConvertor(priceData) {
         let result = {
             timestamp: data.timestamp,
             price: mwToKw(data.price),
+            priceF:mwToKwF(data.price),
             hour: hour,
             day: day,
             color: color,

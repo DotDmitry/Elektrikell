@@ -3,4 +3,4 @@
 
 export { default as chartDataConvertor } from "./chartDataConvertor"
 
-export { mwToKw } from "./priceFormats"
+export { mwToKw,mwToKwF } from "./priceFormats"
