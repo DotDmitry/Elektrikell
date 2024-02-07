@@ -11,3 +11,5 @@ export const convertToRequstFormat = (datetime) => moment(datetime).format();
 export const currentTimeStamp = () => moment().minutes(0).seconds(0).unix();
 
 export const currentTimeMinutes = () => moment().minutes();
+
+export const currentTimeML = () => +moment();
