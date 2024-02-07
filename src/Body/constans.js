@@ -1,0 +1,1 @@
+export const ERROR_MESSAGE="Error from '/nps/price'";

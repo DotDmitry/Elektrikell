@@ -22,10 +22,6 @@ function CustomDot(props) {
             <Dot {...newProps} r={4} fill="red" strokeWidth={1} stroke="none" />
             <text x={newProps.cx} y={newProps.cy - 20} textAnchor="middle" fill="#666">{`${value} c/kWh`}</text>
         </>
-        /*  <g>
-             <circle cx={cx + 10} cy={cy} r={6} fill='red' />
-             
-         </g> */
     );
 };
 

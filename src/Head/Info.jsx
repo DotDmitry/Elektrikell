@@ -8,21 +8,26 @@ import moment from "moment/moment"
 import { getPriceCurrent } from "../services/ApiService";
 import { mwToKw } from "../utils";
 
-import { PRICE_BUTTONS, BADGES } from "./constans"
+import { PRICE_BUTTONS, BADGES,ERROR_MESSAGE } from "./constans"
 
-function Info({ activePrice, setActivePrice, averagePrice }) {
+function Info({ activePrice, setActivePrice, averagePrice, setErrorMessage }) {
 
     const [priceCurrent, setPriceCurrent] = useState({ price: 0, timestamp: 0 });
     const [isLow, setIsLow] = useState(false);
 
     useEffect(() => {
-        getPriceCurrent()
-            .then(
-                ({ data }) => {
-                    setPriceCurrent(data[0]);
-                }
+        try {
+            getPriceCurrent()
+                .then(
+                    ({ data,success }) => {
+                        if(!success)throw new Error();
+                        setPriceCurrent(data[0]);
+                    }
+                )
+        } catch {
+            setErrorMessage(ERROR_MESSAGE);
+        }
 
-            )
     }, []);
 
     useEffect(() => {
