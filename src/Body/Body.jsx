@@ -24,13 +24,15 @@ function Body(props) {
     /*  useCallback -static cash function */
 
     useEffect(() => {
+        props.setIsLoading(true);
         getPriceData(props.filterFrom, props.filterUntil).then(
             ({ data, success }) => {
                 if (!success) throw new Error();
                 const priceData = chartDataConvertor(data.ee);
                 setPriceData(priceData);
             }
-        ).catch(() => props.setErrorMessage(ERROR_MESSAGE));
+        ).catch(() => props.setErrorMessage(ERROR_MESSAGE))
+        .finally(()=>props.setIsLoading(false));
 
     }, [props.filterFrom, props.filterUntil]);
 
@@ -67,7 +69,7 @@ function Body(props) {
                             <Tooltip content={<CustomTooltip />} />
                             <Line type="stepAfter" dataKey="price" stroke="#8884d8" activeDot={false} dot={<CustomDot />} />
                             <ReferenceLine y={maxPrice} label={`Max: ${maxPrice} c/kWh`} stroke="red" strokeDasharray="3 3" />
-                            <ReferenceLine y={props.averagePrice} label={`Average: ${props.averagePrice} c/kWh`} stroke="blue" strokeDasharray="3 3" />
+                            <ReferenceLine y={props.averagePrice} label={`Average: ${props.averagePrice.toFixed(2)} c/kWh`} stroke="blue" strokeDasharray="3 3" />
                             <ReferenceLine y={minPrice} label={`Min: ${minPrice} c/kWh`} stroke="green" strokeDasharray="3 3" />
                             <ReferenceArea xAxisId="2" x1={x1} x2={x2} stroke="red" strokeOpacity={0.3} />
                         </LineChart>
