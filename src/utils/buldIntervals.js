@@ -38,10 +38,7 @@ export const getLowPriceInterval = (data, interval) => {
     indexX2 = indexX2 < data.length ? indexX2 : data.length - 1;
 
     const x1 = data[indexX1].timestamp;
-    const x2 = indexX1 < indexX2 ? data[indexX2].timestamp : x1 -50;
-    console.log("x2",x2);
-
-
+    const x2 = indexX1 < indexX2 ? data[indexX2].timestamp : x1;
     const bestTime = `from ${data[indexX1].hour}:00 to ${data[indexX2].hour}:00`;
     const averagePrice = (min / interval).toFixed(2);
     const currPrice = parseFloat(newData[0].price);

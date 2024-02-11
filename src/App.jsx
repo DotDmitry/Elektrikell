@@ -13,8 +13,7 @@ function App() {
                     <Route path="lowPrice/:hours" element={<ElectricPrice />} />
                 </Route>
                 <Route path="/about" element={<About />}  >
-                    <Route path=":id" element={<About />} />
-                    <Route path=":id/:name" element={<About />} />
+                    <Route path=":name" element={<About />} />
                 </Route>
                 <Route path="*" element={<h1>404</h1>} />
             </Routes>
