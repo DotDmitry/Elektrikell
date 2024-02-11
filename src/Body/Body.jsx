@@ -1,6 +1,9 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+
+import { Sliders } from 'react-bootstrap-icons';
 import { CustomDot, CustomTick, CustomTooltip } from "./Chart"
 import { LineChart, CartesianGrid, YAxis, XAxis, Tooltip, Line, ResponsiveContainer, ReferenceLine, ReferenceArea } from 'recharts';
 
@@ -32,7 +35,7 @@ function Body(props) {
                 setPriceData(priceData);
             }
         ).catch(() => props.setErrorMessage(ERROR_MESSAGE))
-        .finally(()=>props.setIsLoading(false));
+            .finally(() => props.setIsLoading(false));
 
     }, [props.filterFrom, props.filterUntil]);
 
@@ -57,6 +60,13 @@ function Body(props) {
 
     return (
         <>
+            <Row>
+                <Col>
+                <Button className='p-2' style={{lineHeight:'0'}} variant="outline-secondary" onClick={props.handleShowSideBar}>
+                <Sliders />
+            </Button>
+                </Col>
+            </Row>
             <Row>
                 <Col>
                     <ResponsiveContainer width="100%" height={400}>

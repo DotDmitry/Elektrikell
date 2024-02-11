@@ -41,12 +41,40 @@ function ElectricPrice() {
   return (
     <>
       <Container>
-        <Head setErrorMessage={setErrorMessage} activePrice={activePrice} setActivePrice={setActivePrice} averagePrice={averagePrice} handleShowSideBar={handleShowSideBar} />
-        <Body setIsLoading={setIsLoading} setErrorMessage={setErrorMessage} activeInterval={activeInterval} averagePrice={averagePrice} setAveragePrice={setAveragePrice} filterFrom={filterFrom} filterUntil={filterUntil} setCountdownDataContext={setCountdownDataContext} />
-        <Footer activePrice={activePrice} activeInterval={activeInterval} setActiveInterval={setActiveInterval} countdownDataContext={countdownDataContext} />
+        <Head
+          setErrorMessage={setErrorMessage}
+          activePrice={activePrice}
+          setActivePrice={setActivePrice}
+          averagePrice={averagePrice}
+        />
+        <Body
+          handleShowSideBar={handleShowSideBar}
+          setIsLoading={setIsLoading}
+          setErrorMessage={setErrorMessage}
+          activeInterval={activeInterval}
+          averagePrice={averagePrice}
+          setAveragePrice={setAveragePrice}
+          filterFrom={filterFrom}
+          filterUntil={filterUntil}
+          setCountdownDataContext={setCountdownDataContext} />
+        <Footer
+          activePrice={activePrice}
+          activeInterval={activeInterval}
+          setActiveInterval={setActiveInterval}
+          countdownDataContext={countdownDataContext} />
       </Container>
-      <SideBar show={showFilters} handleClose={handleCloseSideBar} filterFrom={filterFrom} setfilterFrom={setfilterFrom} filterUntil={filterUntil} setfilterUntil={setfilterUntil} />
-      <ErrorModal show={!!errorMessage} errorMessage={errorMessage} handleClose={() => setErrorMessage(null)} />
+      <SideBar
+        show={showFilters}
+        handleClose={handleCloseSideBar}
+        filterFrom={filterFrom}
+        setfilterFrom={setfilterFrom}
+        filterUntil={filterUntil}
+        setfilterUntil={setfilterUntil} />
+      <ErrorModal
+        show={!!errorMessage}
+        errorMessage={errorMessage}
+        handleClose={() => setErrorMessage(null)} />
+
       {isLoading && <h1>Loading</h1>}
     </>
   );

@@ -7,7 +7,7 @@ function Head(props) {
     return (
         <>
             <Row>
-                <Logo handleShowSideBar={props.handleShowSideBar} />
+                <Logo/>
             </Row>
             <Row>
                 <Info {...props}/>
