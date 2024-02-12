@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 
 
 
-function ElectricPrice() {
+function ElectricPrice(props) {
   const params = useParams();
 
   const [activePrice, setActivePrice] = useState(DEFAULT_ACTIVE_BUTTON);
@@ -28,8 +28,7 @@ function ElectricPrice() {
   const [countdownDataContext, setCountdownDataContext] = useState(null);
   const [averagePrice, setAveragePrice] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
+ 
   useEffect(() => {
     if (params.hours) {
       setActiveInterval(+params.hours);
@@ -49,7 +48,7 @@ function ElectricPrice() {
         />
         <Body
           handleShowSideBar={handleShowSideBar}
-          setIsLoading={setIsLoading}
+          setIsLoading={props.setIsLoading}
           setErrorMessage={setErrorMessage}
           activeInterval={activeInterval}
           averagePrice={averagePrice}
@@ -74,8 +73,6 @@ function ElectricPrice() {
         show={!!errorMessage}
         errorMessage={errorMessage}
         handleClose={() => setErrorMessage(null)} />
-
-      {isLoading && <h1>Loading</h1>}
     </>
   );
 }

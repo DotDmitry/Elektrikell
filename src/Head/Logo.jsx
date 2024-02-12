@@ -5,7 +5,7 @@ function Logo() {
     return (
         <>
             <Col>
-                <svg style={{width:'50px'}} fill="current" version="1.1" viewBox="0 0 512 512">
+                <svg style={{width:'50px'}} fill="currentColor" version="1.1" viewBox="0 0 512 512">
                     <g>
                         <g>
                             <path d="M511.936,250.128c-1.298-57.879-22.545-114.227-59.83-158.66C408.154,39.088,346.436,6.959,278.319,1
