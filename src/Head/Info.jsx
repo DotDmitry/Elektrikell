@@ -7,10 +7,14 @@ import Badge from 'react-bootstrap/Badge';
 import moment from "moment/moment"
 import { getPriceCurrent } from "../services/ApiService";
 import { mwToKw } from "../utils";
+import { useSelector, useDispatch } from "react-redux";
+import { setActivePrice } from "../services/stateService";
 
-import { PRICE_BUTTONS, BADGES,ERROR_MESSAGE } from "./constans"
+import { PRICE_BUTTONS, BADGES, ERROR_MESSAGE } from "./constans"
 
-function Info({ activePrice, setActivePrice, averagePrice, setErrorMessage }) {
+function Info({ averagePrice, setErrorMessage }) {
+    const activePrice = useSelector((state) => state.main.activePrice);
+    const dispatch = useDispatch();
 
     const [priceCurrent, setPriceCurrent] = useState({ price: 0, timestamp: 0 });
     const [isLow, setIsLow] = useState(false);
@@ -19,8 +23,8 @@ function Info({ activePrice, setActivePrice, averagePrice, setErrorMessage }) {
         try {
             getPriceCurrent()
                 .then(
-                    ({ data,success }) => {
-                        if(!success)throw new Error();
+                    ({ data, success }) => {
+                        if (!success) throw new Error();
                         setPriceCurrent(data[0]);
                     }
                 )
@@ -47,7 +51,7 @@ function Info({ activePrice, setActivePrice, averagePrice, setErrorMessage }) {
                 <ButtonGroup>
                     {
                         PRICE_BUTTONS.map(({ name, id }) => (
-                            <Button key={id} active={activePrice === id} variant="secondary" onClick={() => setActivePrice(id)}>{name}</Button>
+                            <Button key={id} active={activePrice === id} variant="secondary" onClick={() => dispatch(setActivePrice(id))}>{name}</Button>
                         ))
                     }
 

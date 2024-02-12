@@ -22,7 +22,7 @@ function TargetLow(props) {
                 <Col className='text-center'>Want to consume before the morning</Col>
             </Row>
             <Row>
-                <Col><Intervals activeInterval={props.activeInterval} setActiveInterval={props.setActiveInterval} ></Intervals></Col>
+                <Col><Intervals ></Intervals></Col>
             </Row>
             <Row>
                 <Col className='text-center'>

@@ -11,6 +11,7 @@ import { getPriceData } from "../services/ApiService";
 import { chartDataConvertor } from "../utils";
 import { getLowPriceInterval } from "../utils/buldIntervals";
 import { ERROR_MESSAGE } from "./constans";
+import { useSelector } from "react-redux";
 
 
 function Body(props) {
@@ -19,6 +20,9 @@ function Body(props) {
     const [maxPrice, setMaxPrice] = useState(0);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
+    const activeInterval = useSelector((state) => state.main.activeInterval);
+    const filterFrom = useSelector((state) => state.dates.filterFrom);
+    const filterUntil = useSelector((state) => state.dates.filterUntil);
 
     /*  const averagePrice=useMemo(()=>{
          return setMaxPrice(max);
@@ -28,7 +32,7 @@ function Body(props) {
 
     useEffect(() => {
         props.setIsLoading(true);
-        getPriceData(props.filterFrom, props.filterUntil).then(
+        getPriceData(filterFrom, filterUntil).then(
             ({ data, success }) => {
                 if (!success) throw new Error();
                 const priceData = chartDataConvertor(data.ee);
@@ -37,7 +41,7 @@ function Body(props) {
         ).catch(() => props.setErrorMessage(ERROR_MESSAGE))
             .finally(() => props.setIsLoading(false));
 
-    }, [props.filterFrom, props.filterUntil]);
+    }, [filterFrom, filterUntil]);
 
     useEffect(() => {
 
@@ -49,22 +53,22 @@ function Body(props) {
     }, [priceData]);
 
     useEffect(() => {
-        const result = getLowPriceInterval(priceData, props.activeInterval);
+        const result = getLowPriceInterval(priceData, activeInterval);
 
         if (result) {
             setX1(result.x1);
             setX2(result.x2);
             props.setCountdownDataContext(result);
         }
-    }, [priceData, props.activeInterval]);
+    }, [priceData, activeInterval]);
 
     return (
         <>
             <Row>
                 <Col>
-                <Button className='p-2' style={{lineHeight:'0'}} variant="outline-secondary" onClick={props.handleShowSideBar}>
-                <Sliders />
-            </Button>
+                    <Button className='p-2' style={{ lineHeight: '0' }} variant="outline-secondary" onClick={props.handleShowSideBar}>
+                        <Sliders />
+                    </Button>
                 </Col>
             </Row>
             <Row>
