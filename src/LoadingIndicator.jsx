@@ -1,15 +1,17 @@
-/* import parse from 'html-react-parser'; */
+import { useSelector } from "react-redux";
 
-function LoadingIndicator({isLoading}){
+function LoadingIndicator() {
+
+    const isLoading = useSelector((state) => state.body.isLoading);
 
     const temp = document.getElementById('busyindicator');
-    if(isLoading){
-        temp.style.display="block";
-    }else{
-        temp.style.display="none";
+    if (isLoading) {
+        temp.style.display = "block";
+    } else {
+        temp.style.display = "none";
     }
 
-    return(
+    return (
         <></>
     )
 }

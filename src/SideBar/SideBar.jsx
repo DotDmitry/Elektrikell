@@ -1,15 +1,22 @@
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Filters from "./Filters";
+import { useSelector, useDispatch } from "react-redux";
+import { handleCloseSideBar } from "../services/stateService";
 
-function SideBar(props) {
+function SideBar() {
+
+    const dispatch = useDispatch();
+    const show = useSelector((state) => state.body.showFilters);
+    const close = () => dispatch(handleCloseSideBar());
+
     return (
         <>
-            <Offcanvas show={props.show} onHide={props.handleClose}>
+            <Offcanvas show={show} onHide={close}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Filters</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <Filters handleClose={props.handleClose}  />
+                    <Filters handleClose={close} />
                 </Offcanvas.Body>
             </Offcanvas>
         </>

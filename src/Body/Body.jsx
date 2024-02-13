@@ -11,18 +11,23 @@ import { getPriceData } from "../services/ApiService";
 import { chartDataConvertor } from "../utils";
 import { getLowPriceInterval } from "../utils/buldIntervals";
 import { ERROR_MESSAGE } from "./constans";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setErrorMessage, setAveragePrice, handleShowSideBar, setCountdownDataContext, setIsLoading } from "../services/stateService";
 
 
-function Body(props) {
+function Body() {
+    const dispatch = useDispatch();
+    const averagePrice = useSelector((state) => state.body.averagePrice);
+    const activeInterval = useSelector((state) => state.main.activeInterval);
+
+    const filterFrom = useSelector((state) => state.dates.filterFrom);
+    const filterUntil = useSelector((state) => state.dates.filterUntil);
+
     const [priceData, setPriceData] = useState(null);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
-    const activeInterval = useSelector((state) => state.main.activeInterval);
-    const filterFrom = useSelector((state) => state.dates.filterFrom);
-    const filterUntil = useSelector((state) => state.dates.filterUntil);
 
     /*  const averagePrice=useMemo(()=>{
          return setMaxPrice(max);
@@ -31,15 +36,15 @@ function Body(props) {
     /*  useCallback -static cash function */
 
     useEffect(() => {
-        props.setIsLoading(true);
+        dispatch(setIsLoading(true));
         getPriceData(filterFrom, filterUntil).then(
             ({ data, success }) => {
                 if (!success) throw new Error();
                 const priceData = chartDataConvertor(data.ee);
                 setPriceData(priceData);
             }
-        ).catch(() => props.setErrorMessage(ERROR_MESSAGE))
-            .finally(() => props.setIsLoading(false));
+        ).catch(() => dispatch(setErrorMessage(ERROR_MESSAGE)))
+            .finally(() => dispatch(setIsLoading(false)));
 
     }, [filterFrom, filterUntil]);
 
@@ -49,7 +54,7 @@ function Body(props) {
         const max = (priceData?.find(item => item.max === true))?.price;
         setMinPrice(min);
         setMaxPrice(max);
-        props.setAveragePrice((parseFloat(min) + parseFloat(max)) / 2);
+        dispatch(setAveragePrice((parseFloat(min) + parseFloat(max)) / 2));
     }, [priceData]);
 
     useEffect(() => {
@@ -58,7 +63,7 @@ function Body(props) {
         if (result) {
             setX1(result.x1);
             setX2(result.x2);
-            props.setCountdownDataContext(result);
+            dispatch(setCountdownDataContext(result));
         }
     }, [priceData, activeInterval]);
 
@@ -66,7 +71,7 @@ function Body(props) {
         <>
             <Row>
                 <Col>
-                    <Button className='p-2' style={{ lineHeight: '0' }} variant="outline-secondary" onClick={props.handleShowSideBar}>
+                    <Button className='p-2' style={{ lineHeight: '0' }} variant="outline-secondary" onClick={() => dispatch(handleShowSideBar())}>
                         <Sliders />
                     </Button>
                 </Col>
@@ -83,7 +88,7 @@ function Body(props) {
                             <Tooltip content={<CustomTooltip />} />
                             <Line type="stepAfter" dataKey="price" stroke="#8884d8" activeDot={false} dot={<CustomDot />} />
                             <ReferenceLine y={maxPrice} label={`Max: ${maxPrice} c/kWh`} stroke="red" strokeDasharray="3 3" />
-                            <ReferenceLine y={props.averagePrice} label={`Average: ${props.averagePrice.toFixed(2)} c/kWh`} stroke="blue" strokeDasharray="3 3" />
+                            <ReferenceLine y={averagePrice} label={`Average: ${averagePrice.toFixed(2)} c/kWh`} stroke="blue" strokeDasharray="3 3" />
                             <ReferenceLine y={minPrice} label={`Min: ${minPrice} c/kWh`} stroke="green" strokeDasharray="3 3" />
                             <ReferenceArea xAxisId="2" x1={x1} x2={x2} stroke="red" strokeOpacity={0.3} />
                         </LineChart>
