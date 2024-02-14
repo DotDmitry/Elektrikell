@@ -3,14 +3,15 @@ import Row from 'react-bootstrap/Row';
 import Logo from "./Logo";
 import Info from "./Info";
 
-function Head(props) {
+function Head() {
+    
     return (
         <>
             <Row>
                 <Logo/>
             </Row>
             <Row>
-                <Info {...props}/>
+                <Info />
             </Row>
         </>
     );

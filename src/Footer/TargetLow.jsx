@@ -3,18 +3,20 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Intervals from "./Intervals";
 import Countdown from 'react-countdown';
+import { useSelector } from "react-redux";
 
-function TargetLow(props) {
+function TargetLow() {
 
     const countdownRef = useRef(null);
+    const countdownDataContext = useSelector((state) => state.body.countdownDataContext);
 
     useEffect(() => {
 
-        if (props.countdownDataContext && !props.countdownDataContext.isNow && countdownRef.current) {
+        if (countdownDataContext && !countdownDataContext.isNow && countdownRef.current) {
             countdownRef.current.start();
         }
 
-    }, [props.countdownDataContext]);
+    }, [countdownDataContext]);
 
     return (
         <>
@@ -26,9 +28,9 @@ function TargetLow(props) {
             </Row>
             <Row>
                 <Col className='text-center'>
-                    {props.countdownDataContext != null ?
+                    {countdownDataContext != null ?
                         <>
-                            {props.countdownDataContext.isNow ?
+                            {countdownDataContext.isNow ?
                                 <>
                                     <div>The best time for that</div>
                                     <div className='fs-1 fw-semibold'>CURRENTLY</div>
@@ -36,10 +38,10 @@ function TargetLow(props) {
                                 </>
                                 :
                                 <>
-                                    <div>The best time for this is {props.countdownDataContext.bestTime}, which is left</div>
-                                    <Countdown ref={countdownRef} autoStart={false} className='fs-1' daysInHours={true} date={props.countdownDataContext.countDownMS} >
+                                    <div>The best time for this is {countdownDataContext.bestTime}, which is left</div>
+                                    <Countdown ref={countdownRef} autoStart={false} className='fs-1' daysInHours={true} date={countdownDataContext.countDownMS} >
                                     </Countdown>
-                                    <div>Then the price per kilowatt hour will be {props.countdownDataContext.averagePrice} cents, which is {props.countdownDataContext.deltaPercent}% {props.countdownDataContext.isCheap?"cheaper":"more expensive"} than it is now</div>
+                                    <div>Then the price per kilowatt hour will be {countdownDataContext.averagePrice} cents, which is {countdownDataContext.deltaPercent}% {countdownDataContext.isCheap ? "cheaper" : "more expensive"} than it is now</div>
                                 </>}
                         </> : <div></div>
                     }
