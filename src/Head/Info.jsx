@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -9,12 +9,17 @@ import { mwToKw } from "../utils";
 import { useSelector, useDispatch } from "react-redux";
 import { setActivePrice, setErrorMessage } from "../services/stateService";
 
+import {ElectricPriceContext} from "../Contexts/ElectricPriceContext"
+
 import { PRICE_BUTTONS, BADGES, ERROR_MESSAGE } from "./constans"
 
 function Info() {
     const dispatch = useDispatch();
     const activePrice = useSelector((state) => state.main.activePrice);
-    const averagePrice = useSelector((state) => state.body.averagePrice);
+    const {values}=useContext(ElectricPriceContext);
+   /*  const averagePrice = useSelector((state) => state.body.averagePrice); */
+
+   const averagePrice =values.averagePrice;
 
     const [priceCurrent, setPriceCurrent] = useState({ price: 0, timestamp: 0 });
     const [isLow, setIsLow] = useState(false);

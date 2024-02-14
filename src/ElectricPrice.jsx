@@ -10,6 +10,7 @@ import ErrorModal from "./ErrorModal";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setActiveInterval } from "./services/stateService";
+import ElectricPriceProvider from "./Contexts/ElectricPriceContext";
 
 function ElectricPrice() {
   const params = useParams();
@@ -24,13 +25,15 @@ function ElectricPrice() {
 
   return (
     <>
-      <Container>
-        <Head />
-        <Body />
-        <Footer />
-      </Container>
-      <SideBar />
-      <ErrorModal />
+      <ElectricPriceProvider>
+        <Container>
+          <Head />
+          <Body />
+          <Footer />
+        </Container>
+        <SideBar />
+        <ErrorModal />
+      </ElectricPriceProvider>
     </>
   );
 }

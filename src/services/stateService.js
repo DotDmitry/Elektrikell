@@ -46,7 +46,7 @@ export const { setfilterFrom, setfilterUntil } = dateSlice.actions;
 ////////
 
 const initialBody = {
-    averagePrice: 0,
+    /* averagePrice: 0, */
     filterUntil: getDefaultUntil(),
     showFilters: false,
     countdownDataContext: null,
@@ -57,9 +57,9 @@ const bodySlice = createSlice({
     name: 'body',
     initialState: initialBody,
     reducers: {
-        setAveragePrice: (state, action) => {
+        /* setAveragePrice: (state, action) => {
             state.averagePrice = action.payload;
-        },
+        }, */
         handleCloseSideBar: (state, action) => {
             state.showFilters = false;
         },

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -12,12 +12,14 @@ import { chartDataConvertor } from "../utils";
 import { getLowPriceInterval } from "../utils/buldIntervals";
 import { ERROR_MESSAGE } from "./constans";
 import { useSelector, useDispatch } from "react-redux";
-import { setErrorMessage, setAveragePrice, handleShowSideBar, setCountdownDataContext, setIsLoading } from "../services/stateService";
-
+import { setErrorMessage, handleShowSideBar, setCountdownDataContext, setIsLoading } from "../services/stateService";
+import { ElectricPriceContext } from "../Contexts/ElectricPriceContext"
 
 function Body() {
+
+    console.log("body");
     const dispatch = useDispatch();
-    const averagePrice = useSelector((state) => state.body.averagePrice);
+    /*  const averagePrice = useSelector((state) => state.body.averagePrice); */
     const activeInterval = useSelector((state) => state.main.activeInterval);
 
     const filterFrom = useSelector((state) => state.dates.filterFrom);
@@ -28,6 +30,9 @@ function Body() {
     const [maxPrice, setMaxPrice] = useState(0);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
+
+    const { actions, values } = useContext(ElectricPriceContext);
+    const averagePrice = values.averagePrice;
 
     /*  const averagePrice=useMemo(()=>{
          return setMaxPrice(max);
@@ -54,7 +59,7 @@ function Body() {
         const max = (priceData?.find(item => item.max === true))?.price;
         setMinPrice(min);
         setMaxPrice(max);
-        dispatch(setAveragePrice((parseFloat(min) + parseFloat(max)) / 2));
+        actions.setAveragePrice((parseFloat(min) + parseFloat(max)) / 2);
     }, [priceData]);
 
     useEffect(() => {
