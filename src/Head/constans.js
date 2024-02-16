@@ -11,13 +11,13 @@ export const BADGES=[
 
     },
     {
-        name:"average",
-        id:AVERAGE
-
-    },
-    {
         name:"danger",
         id:HIGH
+    },
+    {
+        name:"info",
+        id:AVERAGE
+
     }
 ]
 
