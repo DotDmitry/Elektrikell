@@ -19,7 +19,7 @@ function Info() {
     const {values}=useContext(ElectricPriceContext);
    /*  const averagePrice = useSelector((state) => state.body.averagePrice); */
 
-   const averagePrice =values.averagePrice;
+   const averagePrice = values.averagePrice;
 
     const [priceCurrent, setPriceCurrent] = useState({ price: 0, timestamp: 0 });
     const [isLow, setIsLow] = useState(false);
