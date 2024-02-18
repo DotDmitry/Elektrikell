@@ -12,16 +12,20 @@ function App() {
     return (
         <>
             <Navigation />
+
+
             <Routes>
-                <Route path="/" element={<ElectricPrice />} >
-                    <Route path="lowPrice/:hours" element={<ElectricPrice />} />
+                <Route exact path="/" element={<ElectricPrice />} >
+
+                    
+                    <Route exact path="lowPrice/:hours" element={<ElectricPrice />} />
                 </Route>
-                <Route path="/about" element={<About />}  >
-                    <Route path=":name" element={<About />} />
+                <Route exact path="/about" element={<About />}  >
+                    <Route exact path=":name" element={<About />} />
                 </Route>
-                <Route path="*" element={<h1>404</h1>} />
+                <Route exact path="*" element={<h1>404</h1>} />
             </Routes>
-            <LoadingIndicator/>
+            <LoadingIndicator />
         </>
     );
 }
